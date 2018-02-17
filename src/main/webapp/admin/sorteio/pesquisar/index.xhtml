@@ -1,0 +1,181 @@
+<ui:composition
+    template="/WEB-INF/templates/layout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:aj="http://www.animatejsf.org/animate"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:ct="http://www.chartistjsf.org/charts"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="head.js">
+        <h:outputScript
+            library="js"
+            name="/sorteio/pesquisa.js" />
+    </ui:define>
+    <ui:define name="area">
+        <h:outputText value="#{sorteio.titulo}" />
+    </ui:define>
+    <ui:define name="content">
+        <h:form
+            id="fo-ns"
+            prependId="true"
+            styleClass="fo-registros">
+            <aj:animate
+                target="fo-ns"
+                type="bounce" />
+            <p:panelGrid
+                id="pn-registros"
+                layout="grid"
+                columns="1"
+                styleClass="pn-registros">
+                <p:column>
+                    <p:dataTable
+                        id="registros"
+                        widgetVar="registros"
+                        value="#{sorteio.registros}"
+                        var="registro"
+                        rows="5"
+                        styleClass="dt-registros"
+                        lazy="true"
+                        paginator="true"
+                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
+                        {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        currentPageReportTemplate="Página {currentPage} de {totalPages}"
+                        rowsPerPageTemplate="5,10,15"
+                        resizableColumns="true"
+                        emptyMessage="Nenhum sorteio cadastrado."
+                        reflow="true">
+                        <f:facet name="header">
+                            <h:inputHidden id="globalFilter" />
+                        </f:facet>
+                        <p:column
+                            id="col-id"
+                            headerText="Id"
+                            width="5%"
+                            filterBy="#{registro.id}"
+                            filterStyle="width: 90%;"
+                            filterMaxLength="7"
+                            sortBy="#{registro.id}">
+                            <h:outputText value="#{registro.id}" />
+                        </p:column>
+                        <p:column
+                            headerText="Nº Processo"
+                            width="9%"
+                            filterBy="#{registro.processo.numero}"
+                            filterStyle="width: 90%"
+                            filterMaxLength="15">
+                            <f:facet name="filter">
+                                <p:inputMask
+                                    size="14"
+                                    id="col-processo-numero"
+                                    maxlength="15" />
+                            </f:facet>
+                            <h:outputText
+                                value="#{registro.processo.numero}" />
+                        </p:column>
+                        <p:column
+                            headerText="Instância"
+                            width="14.5%"
+                            filterBy="#{registro.distribuicao.instancia}"
+                            filterStyle="width: 97%"
+                            filterMaxLength="20">
+                            <f:facet name="filter">
+                                <p:selectOneMenu
+                                    id="col-distribuicao-instancia">
+                                    <f:selectItem
+                                        itemLabel="Selecione"
+                                        itemValue="#{null}"
+                                        noSelectionOption="true" />
+                                    <f:selectItems
+                                        value="#{sorteio.instancias}"
+                                        var="instancia"
+                                        itemLabel="#{instancia.nome}"
+                                        itemValue="#{instancia.valor}" />
+                                </p:selectOneMenu>
+                            </f:facet>
+                            <h:outputText
+                                value="#{registro.distribuicao.instancia}"
+                                converter="instanciaConverter" />
+                        </p:column>
+                        <p:column
+                            id="col-processo-interessado"
+                            headerText="Interessado"
+                            width="14%"
+                            filterBy="#{registro.processo.interessado}"
+                            filterStyle="width: 95%"
+                            filterMaxLength="50">
+                            <h:outputText
+                                value="#{registro.processo.interessado}" />
+                        </p:column>
+                        <p:column
+                            id="col-processo-relator"
+                            headerText="Relator"
+                            width="14%"
+                            filterBy="#{registro.relator.nome}"
+                            filterStyle="width: 95%"
+                            filterMaxLength="50">
+                            <h:outputText
+                                value="#{registro.relator.nome}" />
+                        </p:column>
+                        <p:column
+                            headerText="Situação"
+                            width="9%"
+                            filterBy="#{registro.distribuicao.situacao}"
+                            filterStyle="width: 90%">
+                            <f:facet name="filter">
+                                <p:selectOneMenu
+                                    id="col-distribuicao-situacao">
+                                    <f:selectItem
+                                        itemLabel="Selecione"
+                                        itemValue="#{null}" />
+                                    <f:selectItems
+                                        value="#{relator.situacoesCadastro}"
+                                        var="situacao"
+                                        itemLabel="#{situacao.nome}"
+                                        itemValue="#{situacao.valor}" />
+                                </p:selectOneMenu>
+                            </f:facet>
+                            <h:outputText
+                                value="#{registro.distribuicao.situacao}"
+                                converter="situacaoCadastroConverter" />
+                        </p:column>
+                        <p:column
+                            id="col-distribuicao-responsavel"
+                            headerText="Responsável"
+                            width="10%"
+                            filterBy="#{registro.distribuicao.responsavel}"
+                            filterStyle="width: 90%"
+                            filterMaxLength="50">
+                            <h:outputText
+                                value="#{registro.distribuicao.responsavel}" />
+                        </p:column>
+                        <p:column
+                            headerText="Realizado em"
+                            width="10%"
+                            filterBy="#{registro.distribuicao.data}"
+                            filterStyle="width: 90%"
+                            filterMaxLength="10">
+                            <f:facet name="filter">
+                                <p:calendar
+                                    id="col-data"
+                                    mask="xx/xx/xxxx"
+                                    pattern="dd/MM/yyyy"
+                                    navigator="true" />
+                            </f:facet>
+                            <h:outputText
+                                value="#{registro.distribuicao.data}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <f:facet name="footer">
+                            <h:outputText
+                                value="REGISTROS CADASTRADOS: #{sorteio.registros.rowCount}"
+                                styleClass="texto-negrito" />
+                        </f:facet>
+                    </p:dataTable>
+                </p:column>
+            </p:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

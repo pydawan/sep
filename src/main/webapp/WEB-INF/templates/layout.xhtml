@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html
+   xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:p="http://primefaces.org/ui"
+   xmlns:b="http://bootsfaces.net/ui"
+   xmlns:o="http://omnifaces.org/ui"
+   xmlns:of="http://omnifaces.org/functions"
+   xmlns:aj="http://www.animatejsf.org/animate"
+   xmlns:ct="http://www.chartistjsf.org/charts"
+   xmlns:shiro="http://shiro.ops4j.org/tags" >
+<ui:insert name="head">
+   <h:head>
+      <ui:insert name="meta">
+         <ui:insert name="charset">
+            <meta charset="UTF-8" />
+         </ui:insert>
+         <ui:insert name="author">
+            <meta
+               name="author"
+               content="Thiago Alexandre Martins Monteiro" />
+         </ui:insert>
+         <ui:insert name="viewport">
+            <meta
+               name="viewport"
+               content="width=device-width, initial-scale=1.0" />
+         </ui:insert>
+         <ui:insert name="mobile">
+            <meta
+               name="apple-mobile-web-app-capable"
+               content="yes" />
+         </ui:insert>
+      </ui:insert>
+      <ui:insert name="css">
+         <h:outputStylesheet
+            library="css"
+            name="sep.css" />
+         <ui:insert name="favicon">
+            <link
+               rel="shortcut icon"
+               href="#{request.contextPath}/resources/imagens/favicon.ico"
+               type="image/x-icon" />
+            <link
+               rel="icon"
+               href="#{request.contextPath}/resources/imagens/favicon.ico"
+               type="image/x-icon" />
+         </ui:insert>
+         <ui:insert name="font">
+            <link
+               href="https://fonts.googleapis.com/css?family=Archivo+Black"
+               rel="stylesheet" />
+         </ui:insert>
+      </ui:insert>
+      <ui:insert name="custom.css" />
+      <ui:insert name="js">
+         <h:outputScript
+            library="js"
+            name="sep.js" />
+         <h:outputScript
+            library="js"
+            name="locale.js" />
+      </ui:insert>
+      <ui:insert name="head.js" />
+      <ui:insert name="title">
+         <title>SEP - SORTEIO ELETRÔNICO DE PROCESSOS</title>
+      </ui:insert>
+   </h:head>
+</ui:insert>
+<ui:insert name="body">
+   <h:body>
+      <ui:insert name="container">
+         <div id="page">
+            <div id="header">
+               <ui:insert name="header">
+                  <ui:include src="/WEB-INF/templates/header.xhtml" />
+               </ui:insert>
+            </div>
+            <div id="content">
+               <ui:insert name="content">
+                  <ui:include src="/WEB-INF/templates/content.xhtml" />
+               </ui:insert>
+            </div>
+            <div id="footer">
+               <ui:insert name="footer">
+                  <ui:include src="/WEB-INF/templates/footer.xhtml" />
+               </ui:insert>
+            </div>
+         </div>
+      </ui:insert>
+      <ui:insert name="body.js" />
+   </h:body>
+</ui:insert>
+</html>

@@ -1,0 +1,73 @@
+<ui:composition
+   template="/WEB-INF/templates/layout.xhtml"
+   xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:aj="http://www.animatejsf.org/animate"
+   xmlns:b="http://bootsfaces.net/ui"
+   xmlns:ct="http://www.chartistjsf.org/charts"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:p="http://primefaces.org/ui"
+   xmlns:ui="http://java.sun.com/jsf/facelets">
+   <ui:define name="body">
+      <h:body style="padding-top: 60px; background-color: #add;">
+         <b:container>
+            <h:form
+               styleClass="form-signin"
+               prependId="false">
+               <b:growl
+                  id="growl"
+                  placementFrom="top"
+                  show-detail="true"
+                  show-summary="false"
+                  allowDismiss="true"
+                  delay="10000"
+                  escape="true" />
+               <b:iconAwesome
+                  name="cube"
+                  size="5x"
+                  span="12"
+                  style="display: table; margin: 0 auto; margin-bottom: 25px;" />
+               <h2
+                  class="form-signin-heading"
+                  style="text-align: center;">SEP</h2>
+               <b:inputText
+                  id="usuario"
+                  name="username"
+                  placeholder="Usuário"
+                  value="#{autenticacao.username}"
+                  maxlength="50"
+                  required="true"
+                  requiredMessage="Usuário é um campo de preenchimento obrigatório!">
+                  <f:facet name="prepend">
+                     <b:iconAwesome name="user" />
+                  </f:facet>
+               </b:inputText>
+               <b:inputText
+                  id="senha"
+                  name="password"
+                  type="password"
+                  placeholder="Senha"
+                  maxlength="50"
+                  value="#{autenticacao.password}"
+                  required="true"
+                  requiredMessage="Senha é um campo de preenchimento obrigatório!">
+                  <f:facet name="prepend">
+                     <b:iconAwesome name="key" />
+                  </f:facet>
+               </b:inputText>
+               <b:selectBooleanCheckbox
+                  value="true"
+                  caption="Manter-me conectado."
+                  rendered="false" />
+               <b:commandButton
+                  look="primary btn-block"
+                  value="Autenticar"
+                  iconAwesome="sign-in"
+                  size="lg"
+                  actionListener="#{autenticacao.login}"
+                  update="growl" />
+            </h:form>
+         </b:container>
+      </h:body>
+   </ui:define>
+</ui:composition>

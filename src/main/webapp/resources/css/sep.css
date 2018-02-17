@@ -1,0 +1,726 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.ui-widget {
+    /*font-size: 95% !important;*/
+    font-size: 98% !important;
+}
+
+ul.ui-menu-child {
+    width: auto !important;
+    min-width: 250px;
+}
+
+ul.ui-menu-list > li#sair ul.ui-menu-child {
+    width: auto !important;
+    min-width: 115px;
+}
+
+.ui-panel-title {
+    vertical-align: middle !important;
+    text-align: center;
+}
+
+.ui-panelgrid-cell .ui-message.ui-message-error {
+    position: relative;
+    top: auto;
+    width: 95% !important;
+    left: -5px;
+}
+
+.ui-selectonemenu {
+    width: 13% !important;
+}
+
+.form-signin {
+    margin: 0 auto;
+    max-width: 330px;
+    padding: 15px;
+}
+
+div.login {
+    width: 30%;
+    margin: 5% auto;
+    padding: 0;
+}
+
+table.login {
+    width: 85% !important;
+}
+
+input[type=text].login, input[type=password].login {
+    width: 90%;
+}
+
+button.login {
+    width: 46%;
+}
+
+.pn-dados-usuario {
+    width: 100% !important;
+    background-color: transparent !important;
+}
+
+.campo-texto {
+    width: 95%;
+}
+
+.campo-selecao {
+    /*width: 91% !important;*/
+    width: 95% !important;
+}
+
+.campo-selecao-minusculo {
+   width: 12.5% !important;
+}
+
+.campo-selecao-pequeno {
+   width: 25% !important;
+}
+
+.campo-selecao-medio {
+   width: 50% !important;
+}
+
+.campo-selecao-grande {
+   width: 100% !important;
+}
+
+.campo-select {
+    width: 39.5% !important;
+}
+
+.campo-areatexto {
+    width: 95% !important;
+}
+
+.campo-text {
+    width: 86.40% !important;
+    margin-right: 2px !important;
+}
+
+.campo-textarea {
+    width: 97% !important;
+}
+
+.no-border tr, .no-border td {
+    border: none !important;
+}
+
+.pn-username-button {
+    width: 100%;
+    text-align: right !important;
+    border: none !important;
+}
+
+h1.app-name {
+    width: 100%;
+    /*font-size: 18pt;*/
+    font-size: 32pt;
+    font-family: 'Archivo Black', sans-serif;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    color: #02364C;
+}
+
+h3.app-area {
+    width: 100%;
+    margin-bottom: 15px;
+    font-family: 'Archivo Black', sans-serif;
+    /*font-size: 14pt;*/
+    font-size: 16pt;
+    color: red;
+}
+
+h1.left, h2.left, h3.left, h4.left, h5.left, h6.left {
+    text-align: left;
+}
+
+h1.center, h2.center, h3.center, h4.center, h5.center, h6.center {
+    text-align: center;
+}
+
+h1.right, h2.right, h3.right, h4.right, h5.right, h6.right {
+    text-align: right;
+}
+
+.box-center {
+    margin: 0 auto;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.td-right {
+    text-align: right;
+}
+
+.pn-login-buttons {
+    width: 90%;
+    text-align: center;
+    border: none;
+}
+
+.pn-membro-buttons {
+    width: 100%;
+    text-align: right;
+    border: none;
+}
+
+.template-textfield {
+    width: 100%;
+}
+
+.template-textarea {
+    width: 100%;
+}
+
+.ui-button {
+    font-size: 10pt !important;
+}
+
+.ui-datatable {
+    font-size: 10pt !important;
+}
+
+.ui-datepicker {
+    font-size: 10pt !important;
+}
+
+img#dados {
+    margin-top: 25px;
+    width: 10%;
+    height: 10%;
+}
+
+button.situacao-cadastro {
+    width: 50%;
+    height: 25px;
+}
+
+img.http404 {
+    display: block;
+    width: auto;
+    height: auto;
+    margin: 10% auto auto auto;
+    text-align: center;
+    display: block;
+}
+
+.dt-registros {
+/*    width: 95% !important; */
+    width: 100% !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    padding: 0 !important;
+}
+
+.pn-cd-registro {
+    width: 90%;
+    text-align: right;
+    border: none;
+}
+
+.ui-inputfield.hasDatepicker {
+    width: 120px;
+    text-align: center;
+    background-color: #F5F5F5;
+}
+
+.ui-datatable-data tr:hover {
+    /*background-color: #8EBAFF;*/
+    background-color: #3C8DBC;
+    color: #FFF;
+    /*font-weight: 400;*/
+    font-weight: bold;
+    /*font-size: 10.15pt;*/
+}
+
+.pn-pesquisa {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    float: right !important;
+    border: none !important;
+}
+
+.pn-registros {
+    width: 95% !important;
+    margin: 0 auto !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.campos-pesquisa, .criterios-pesquisa {
+    width: 90% !important;
+    font-size: 10pt !important;
+}
+
+.valor-pesquisa-texto {
+    width: 65% !important;
+    font-size: 10pt !important;
+    float: left !important;
+}
+
+.valor-pesquisa-calendario input[type='text'] {
+    width: 38% !important;
+    font-size: 10pt !important;
+    background-color: white !important;
+    float: left !important;
+}
+
+.valor-pesquisa-calendario .ui-datepicker-trigger {
+    margin-left: 1% !important;
+    float: left !important;
+}
+
+.valor-pesquisa-selecao {
+    width: 50% !important;
+    font-size: 10pt !important;
+    float: left !important;
+}
+
+.bt-adicionar {
+    width: 100px !important;
+    /*float: right !important;*/
+    position: relative !important;
+    /*left: 34% !important;*/
+    /*right: -39.5% !important;*/
+    right: -41.25% !important;
+    top: 75% !important;
+}
+
+.bt-editar, .bt-remover {
+    width: 100px;
+}
+
+.bt-acao {
+    width: 100px !important;
+}
+
+.bt-novo {
+    width: 100px !important;
+    position: relative !important;
+    left: 35% !important;
+}
+
+.pn-registros {
+    margin: 0 auto !important;
+}
+
+.dt-registros .ui-panelgrid-content {
+    border: none !important;
+    background-color: transparent;
+}
+
+.dt-registros td:nth-child(4) button {
+    width: 100%;
+}
+
+.fo-registros .ui-panelgrid-content {
+    border: none !important;
+}
+
+.di-registro-acoes {
+    /* width: 100%; */
+    width: 98%;
+    text-align: right;
+    border: none;
+}
+
+.ui-panel-titlebar {
+    text-align: center !important;
+}
+
+.co-usuario {
+    width: 20% !important;
+}
+
+.co-username {
+    width: 45% !important;
+}
+
+.co-sair {
+    width: 20% !important;
+}
+
+#cl-nome-usuario {
+    font-weight: bold !important;
+    text-decoration: none !important;
+}
+
+.pn-pesquisa .ui-grid-row>div {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.pn-pesquisa .ui-grid-row>div:nth-child(1) {
+    width: 10% !important;
+}
+
+.pn-pesquisa .ui-grid-row>div:nth-child(2) {
+    width: 15% !important;
+}
+
+.pn-pesquisa .ui-grid-row>div:nth-child(3) {
+    width: 15% !important;
+}
+
+.pn-pesquisa .ui-grid-row>div:nth-child(4) {
+    width: 30% !important;
+}
+
+.pn-pesquisa .ui-grid-row>div:nth-child(5) {
+    width: 30% !important;
+}
+
+.icone-registro {
+    position: relative !important;
+    /*
+    top: 15px !important;
+    left: 15px !important;
+    */
+    left: 10px !important;
+    top: 8px !important;
+}
+
+td.registro-acoes .ui-grid-row {
+    width: 95% !important;
+}
+
+.ui-icon.ui-confirm-dialog-severity {
+    width: 24px !important;
+    height: 24px !important;
+    background-position: 0 0 !important;
+    background-image: url('/sep/javax.faces.resource/atencao-icone.png.xhtml?ln=imagens') !important;
+}
+
+#di-registro-titulo {
+    position: relative !important;
+    /*left: 60px !important;*/
+    left: 75% !important;
+    top: 8px !important;
+}
+
+#di-auditoria-titulo {
+    position: relative !important;
+    left: 75% !important;
+    top: 8px !important;
+}
+
+.pn-pesquisa-sorteio .ui-widget-content {
+    border: none !important;
+    background-color: transparent;
+}
+
+table.sorteio tr {
+    border: none !important;
+}
+
+table.novo-sorteio {
+    width: 100% !important;
+}
+
+.sorteio td.ui-panelgrid-cell {
+    border: none !important;
+    background: none !important;
+}
+
+.sorteio {
+/*    width: 100% !important; */
+    margin: 0 auto !important;
+    border: none !important;
+    padding: 0 !important;
+    margin-bottom: 70px !important;
+}
+
+.sorteio .ui-panelgrid-content {
+    border: none !important;
+}
+
+.sorteio-col-1 {
+    width: 15% !important;
+}
+
+.sorteio-col-2 {
+    
+}
+
+.sorteio .ui-grid-row:nth-child(2) .sorteio-col-2 {
+    height: 275px !important;
+}
+
+.sorteio .ui-grid-row:nth-child(3) .sorteio-col-2 {
+    height: 225px !important;
+}
+
+.bt-sortear {
+    /*
+    position: relative !important;
+    left: 76.25% !important;
+    margin-top: 50px !important;
+    */
+    /*margin-left: 83% !important;*/
+    float: right;
+}
+
+.esconder {
+    display: none !important;
+}
+
+.mostrar {
+    display: block !important;
+}
+
+.sorteio.juizes .ui-picklist-filter,
+.sorteio.processos .ui-picklist-filter {
+    margin-bottom: 7px !important;
+}
+
+.sorteio.juizes .ui-picklist-item .ui-chkbox {
+    margin-left: 5px !important;
+}
+
+.sorteio.resultado.rodape {
+    font-size: 10pt !important;
+    font-weight: normal !important;
+    color: #02364C !important;
+}
+
+.sorteio.resultado.rodape:hover {
+    font-size: 10.75pt !important;
+    font-weight: bold !important;
+}
+
+.sorteio .campo-selecao {
+    width: 94% !important;
+}
+
+*[id='fo-rs:sorteios'] {
+    width: 90% !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+}
+
+*[id='fo-rs:sorteios'] tbody td:nth-child(3),
+*[id='fo-rs:sorteios'] tbody td:nth-child(4) {
+    /* text-align: justify !important; */
+    text-align: center !important;
+}
+
+.resultado.toolbar {
+    width: 69.5% !important; 
+    margin-left: auto !important; 
+    margin-right: auto !important; 
+    margin-bottom: 10px !important;"
+    background: none !important;
+}
+
+.sorteio .ui-picklist-list-wrapper {
+    /*background-color: red;*/
+}
+
+.sorteio .ui-widget-content.ui-picklist-list.ui-picklist-source {
+    width: 250px !important;
+    height: 150px !important;
+}
+
+.sorteio .ui-widget-content.ui-picklist-list.ui-picklist-target {
+    width: 250px !important;
+    height: 150px !important;
+}
+
+.sorteio .ui-picklist-item .ui-chkbox .ui-widget {
+    margin-right: 3px !important;
+}
+
+.negrito {
+    font-weight: bold !important;
+}
+
+.ui-messages {
+    width: 94% !important;
+    margin: 0 auto !important;
+}
+
+table.ui-panelgrid.ui-widget.pn-pesquisa tbody > tr.ui-widget-content {
+    border: none !important;
+}
+
+td.ui-panelgrid-cell {
+    background-color: #f5f5f5 !important;
+}
+
+.invisivel {
+    visibility: hidden !important;
+}
+
+.visivel {
+    visibility: visible !important;
+}
+
+.overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1001;
+    opacity: 0.8;
+    --moz-opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+
+.content {
+    display: none;
+    position: absolute;
+    top: 2.5%;
+    left: 15%;
+    width: 70%;
+    height: 90%;
+    padding: 16px;
+    border: 5px solid #404040;
+    background-color: white;
+    z-index: 1002;
+    overflow: hidden;
+}
+
+.text-normal {
+    font-weight: normal !important;
+}
+
+.texto-negrito {
+    font-weight: bold !important;
+}
+
+.texto-centralizado {
+    text-align: center !important;
+}
+
+.texto-justificado {
+    text-align: justify !important;
+}
+
+.texto-esquerda {
+    text-align: left !important;
+}
+
+.texto-direita {
+    text-align: right !important;
+}
+
+.flutuar-direita {
+    float: right !important;
+}
+
+.flutuar-esquerda {
+    float: left !important;
+}
+
+.calendario input[type='text'] {
+    width: 100px !important;
+    font-size: 10pt !important;
+    background-color: white !important;
+    float: left !important;
+}
+
+.relatorio .campo-selecao {
+    width: 255px !important;
+}
+
+.relatorio .calendario input[type='text'] {
+    width: 255px !important;
+    font-size: 10pt !important;
+    background-color: white !important;
+    float: left !important;
+}
+
+
+.relatorio td.ui-panelgrid-cell {
+    border: none !important;
+    background: none !important;
+}
+
+.relatorio {
+    margin: 0 auto !important;
+    padding: 0 !important;
+    margin-bottom: 70px !important;
+}
+
+.relatorio .ui-panelgrid-content {
+    border: none !important;
+}
+
+table.relatorio tr {
+    border: none !important;
+}
+
+.ui-messages.relatorio {
+    width: 38% !important;
+}
+
+.ui-messages.sorteio {
+    width: 42% !important;
+    margin-top: 40px !important;
+    margin-bottom: 30px !important;
+}
+
+table.pn-registros > tbody,
+table.pn-registros > tbody > tr,
+table.pn-registros > tbody > tr > td {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+table.pn-pesquisa > tbody,
+table.pn-pesquisa > tbody > tr,
+table.pn-pesquisa > tbody > tr > td {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+div.ui-datatable-header {
+    background-color: transparent !important;
+    border: none;
+}
+
+button.adicionar {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.botao {
+    width: 115px !important;
+}
+
+input.ui-column-filter.ui-inputfield.ui-inputtext,
+div.ui-column-customfilter > div.ui-selectonemenu {
+   width: 100% !important;
+}
+
+div.ui-dialog table.ui-panelgrid td,
+div.ui-dialog table.ui-panelgrid td input,
+div.ui-dialog table.ui-panelgrid td select,
+div.ui-dialog table.ui-panelgrid td textarea {
+   background-color: white !important;
+}
+
+div.ui-messages-info {
+   background-color: #3C8DBC;
+}

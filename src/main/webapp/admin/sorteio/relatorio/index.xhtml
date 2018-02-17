@@ -1,0 +1,120 @@
+<ui:composition
+   template="/WEB-INF/templates/layout.xhtml"
+   xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:aj="http://www.animatejsf.org/animate"
+   xmlns:b="http://bootsfaces.net/ui"
+   xmlns:ct="http://www.chartistjsf.org/charts"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:p="http://primefaces.org/ui"
+   xmlns:ui="http://java.sun.com/jsf/facelets">
+   <ui:define name="area">
+      <h:outputText value="RELATÓRIO DE PROCESSOS SORTEADOS" />
+   </ui:define>
+   <ui:define name="content">
+      <h:form
+         id="fo-relatorio"
+         prependId="true"
+         style="margin-top: 50px;">
+         <p:messages
+            id="messages"
+            showDetail="true"
+            autoUpdate="true"
+            closable="true"
+            showIcon="false"
+            showSummary="true"
+            styleClass="relatorio" />
+         <p:tabView
+            id="abas"
+            dynamic="true">
+            <p:tab
+               id="pesquisa"
+               title="Pesquisa">
+               <p:panelGrid
+                  columns="1"
+                  layout="grid"
+                  styleClass="relatorio">
+                  <p:outputLabel
+                     value="INSTÂNCIA:"
+                     for="instancia"
+                     styleClass="texto-negrito" />
+                  <p:selectOneMenu
+                     id="instancia"
+                     value="#{sorteio.instanciaRelatorio}"
+                     styleClass="campo-selecao">
+                     <f:selectItem
+                        itemLabel="Todas"
+                        itemValue="TODAS" />
+                     <f:selectItems
+                        value="#{sorteio.instancias}"
+                        var="instancia"
+                        itemLabel="#{instancia.nome}"
+                        itemValue="#{instancia.valor}" />
+                  </p:selectOneMenu>
+                  <p:outputLabel
+                     value="DATA INICIAL:"
+                     for="dataInicial"
+                     styleClass="texto-negrito" />
+                  <p:calendar
+                     id="dataInicial"
+                     value="#{sorteio.dataInicial}"
+                     pattern="dd/MM/yyyy"
+                     mask="xx/xx/xxxx"
+                     maskAutoClear="true"
+                     mode="popup"
+                     navigator="true"
+                     styleClass="calendario" />
+                  <p:outputLabel
+                     value="DATA FINAL:"
+                     for="dataFinal"
+                     styleClass="texto-negrito" />
+                  <p:calendar
+                     id="dataFinal"
+                     value="#{sorteio.dataFinal}"
+                     pattern="dd/MM/yyyy"
+                     mask="xx/xx/xxxx"
+                     maskAutoClear="true"
+                     mode="popup"
+                     navigator="true"
+                     styleClass="calendario" />
+                  <p:row>
+                     <p:column>
+                        <p:spacer width="100%" height="10px" />
+                        <p:commandButton
+                           id="emitir-relatorio"
+                           value="PESQUISAR"
+                           icon="fa fa-fw fa-search"
+                           actionListener="#{sorteio.gerarRelatorioProcessosSorteados}"
+                           oncomplete="fecharMensagem('fo-relatorio')"
+                           update=":fo-relatorio:abas" />
+                        <p:spacer width="10" />
+                        <p:commandButton
+                           value="LIMPAR"
+                           actionListener="#{sorteio.limparRelatorio}"
+                           resetValues="true"
+                           process="@this"
+                           update="@form"
+                           immediate="true"
+                           validateClient="true"
+                           styleClass="botao" />
+                     </p:column>
+                  </p:row>
+               </p:panelGrid>
+            </p:tab>
+            <p:tab
+               id="relatorio"
+               title="Relatório"
+               disabled="true">
+               <h:panelGrid width="100%">
+                  <iframe
+                     id="relatorio-anual-sorteios"
+                     name="relatorio-anual-sorteios"
+                     width="100%"
+                     height="600px"
+                     src="#{sorteio.relatorio}" />
+               </h:panelGrid>
+            </p:tab>
+         </p:tabView>
+      </h:form>
+   </ui:define>
+</ui:composition>

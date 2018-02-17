@@ -1,0 +1,134 @@
+<ui:composition
+    template="/WEB-INF/templates/layout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:aj="http://www.animatejsf.org/animate"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:ct="http://www.chartistjsf.org/charts"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="area">
+        <h:outputText value="#{titulo}" />
+    </ui:define>
+    <ui:define name="content">
+        <p:tabView
+            id="abas"
+            dynamic="true">
+            <p:ajax
+                event="tabChange"
+                listener="#{sorteio.onTabChange}" />
+            <p:tab
+                id="resultado"
+                title="Resultado">
+                <h:panelGrid
+                    columns="2"
+                    cellpadding="10">
+                    <h:form
+                        id="fo-rs"
+                        prependId="true">
+                        <p:dataTable
+                            id="sorteios"
+                            widgetVar="sorteios"
+                            value="#{resultado}"
+                            var="sorteio"
+                            styleClass="dt-resultado-sorteio"
+                            lazy="false"
+                            emptyMessage="Nenhum sorteio realizado."
+                            reflow="true">
+                            <f:facet name="header">
+                                <!--
+                                <p:commandButton
+                                    value="Visualizar"
+                                    icon="fa fa-file-pdf-o"
+                                    ajax="false">
+                                    <p:dataExporter
+                                        type="pdf"
+                                        target="sorteios"
+                                        fileName="#{arquivo}" />
+                                </p:commandButton>
+-->
+                                <p:commandButton
+                                    value="Comprovante"
+                                    icon="fa fa-file-pdf-o"
+                                    actionListener="#{sorteio.visualizarComprovante}"
+                                    update=":abas" />
+                            </f:facet>
+                            <f:facet name="footer">
+                                <h:outputText
+                                    value="Sorteio realizado por #{responsavel} em #{cidade} no #{local}, dia #{data}."
+                                    styleClass="sorteio resultado rodape" />
+                            </f:facet>
+                            <p:column
+                                headerText="Id"
+                                width="10%"
+                                filterBy="#{sorteio.id}"
+                                filterMatchMode="startsWith"
+                                filterStyle="width: 90%;">
+                                <h:outputText value="#{sorteio.id}" />
+                            </p:column>
+                            <p:column
+                                headerText="Processo"
+                                width="10%"
+                                filterBy="#{sorteio.processo.numero}"
+                                filterMatchMode="startsWith"
+                                filterStyle="width: 90%">
+                                <h:outputText value="#{sorteio.processo.numero}" />
+                            </p:column>
+                            <p:column
+                                headerText="Instância"
+                                rendered="false">
+                                <h:outputText
+                                    value="Câmara de Julgamento"
+                                    rendered="#{sorteio.instancia eq 'CAMARA_DE_JULGAMENTO'}" />
+                                <h:outputText
+                                    value="Conselho Regulador"
+                                    rendered="#{sorteio.instancia eq 'CONSELHO_REGULADOR'}" />
+                            </p:column>
+                            <p:column
+                                headerText="Interessado"
+                                filterBy="#{sorteio.processo.interessado}"
+                                filterMatchMode="startsWith"
+                                filterStyle="width: 97%"
+                                width="40%">
+                                <h:outputText value="#{sorteio.processo.interessado}" />
+                            </p:column>
+                            <p:column
+                                headerText="Relator"
+                                filterBy="#{sorteio.processo.relator.nome}"
+                                filterMatchMode="startsWith"
+                                filterStyle="width: 97%"
+                                width="40%">
+                                <h:outputText value="#{sorteio.processo.relator.nome}" />
+                            </p:column>
+                        </p:dataTable>
+                        <p:spacer height="50px" />
+                    </h:form>
+                </h:panelGrid>
+            </p:tab>
+            <p:tab
+                id="comprovante"
+                title="Comprovante"
+                disabled="true">
+                <h:panelGrid width="100%">
+                    <iframe
+                        id="comprovante-sorteio"
+                        name="comprovante-sorteio"
+                        width="100%"
+                        height="600px"
+                        src="/sep/spring/relatorio/sorteio/#{distribuicao}" />
+                    <!--
+                    <p:media
+                        id="relatorio"
+                        value="#{comprovante}"
+                        player="pdf"
+                        width="100%"
+                        height="500px"
+                        ajax="false"
+                        cache="true" />
+-->
+                </h:panelGrid>
+            </p:tab>
+        </p:tabView>
+    </ui:define>
+</ui:composition>

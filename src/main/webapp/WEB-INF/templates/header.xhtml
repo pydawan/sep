@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html
+   xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:p="http://primefaces.org/ui"
+   xmlns:shiro="http://shiro.ops4j.org/tags">
+<body>
+   <ui:composition>
+      <h:form
+         id="form-layout"
+         prependId="false">
+         <p:growl
+            id="mensagens"
+            showDetail="false"
+            sticky="false" />
+         <p:menubar id="menu">
+            <p:menuitem
+               id="mi-admin-home"
+               value="Início"
+               icon="fa fa-fw fa-home"
+               url="/admin/" />
+            <shiro:hasAnyRoles name="GERENCIA_SECRETARIA_GERAL,COORDENACAO_INFORMATICA">
+               <p:submenu
+                  label="Cadastro"
+                  icon="fa fa-fw fa-pencil">
+                  <p:menuitem
+                     id="mi-cadastro-relator"
+                     value="Cadastrar Relator"
+                     icon="fa fa-fw fa-user"
+                     url="/admin/relator/" />
+                  <p:separator />
+                  <p:menuitem
+                     id="mi-cadastro-processo"
+                     value="Cadastrar Processo"
+                     icon="fa fa-fw fa-file-o"
+                     url="/admin/processo/" />
+               </p:submenu>
+            </shiro:hasAnyRoles>
+            <p:submenu
+               label="Sorteio"
+               icon="fa fa-fw fa-gear">
+               <shiro:hasAnyRoles name="GERENCIA_SECRETARIA_GERAL,COORDENACAO_INFORMATICA">
+                  <p:menuitem
+                     id="mi-sorteio-novo"
+                     value="Sortear Processos"
+                     icon="fa fa-fw fa-cube"
+                     url="/admin/sorteio/" />
+                  <p:separator />
+               </shiro:hasAnyRoles>
+               <p:menuitem
+                  id="mi-sorteio-pesquisa"
+                  value="Pesquisar Sorteio"
+                  icon="fa fa-fw fa-search"
+                  url="/admin/sorteio/pesquisar/" />
+               <p:separator />
+               <p:menuitem
+                  id="mi-sorteio-validar"
+                  value="Validar Sorteio"
+                  icon="fa fa-fw fa-qrcode"
+                  url="/admin/sorteio/validar/" />
+            </p:submenu>
+            <shiro:hasAnyRoles name="GERENCIA_SECRETARIA_GERAL,COORDENACAO_INFORMATICA">
+               <p:submenu
+                  label="Relatório"
+                  icon="fa fa-fw fa-file-text-o">
+                  <p:menuitem
+                     value="Relatório de Processos Sorteados"
+                     icon="fa fa-fw fa-file-text-o"
+                     url="/admin/sorteio/relatorio/" />
+               </p:submenu>
+            </shiro:hasAnyRoles>
+            <p:submenu
+               id="sair"
+               label="#{usuarioMB.usuario.username}"
+               icon="fa fa-fw fa-user"
+               style="float: right">
+               <p:menuitem
+                  value="Sair"
+                  icon="fa fa-fw fa-sign-out "
+                  actionListener="#{autenticacao.logout}">
+               </p:menuitem>
+            </p:submenu>
+         </p:menubar>
+         <p:tooltip
+            value='Página inicial.'
+            position="bottom" />
+      </h:form>
+      <h1 class="app-name center">SORTEIOS</h1>
+      <h3 class="app-area center">
+         <ui:insert name="area">Início</ui:insert>
+      </h3>
+   </ui:composition>
+</body>
+</html>

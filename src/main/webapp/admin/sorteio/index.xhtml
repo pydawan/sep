@@ -1,0 +1,147 @@
+<ui:composition
+   template="/WEB-INF/templates/layout.xhtml"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:p="http://primefaces.org/ui"
+   xmlns:b="http://bootsfaces.net/ui"
+   xmlns:o="http://omnifaces.org/ui"
+   xmlns:of="http://omnifaces.org/functions"
+   xmlns:aj="http://www.animatejsf.org/animate"
+   xmlns:ct="http://www.chartistjsf.org/charts"
+   xmlns:shiro="http://shiro.ops4j.org/tags">
+   <ui:define name="area">
+      <h:outputText value="#{sorteio.titulo}" />
+   </ui:define>
+   <ui:define name="content">
+      <h:form
+         id="fo-ns"
+         prependId="true">
+         <aj:animate
+            target="fo-ns"
+            type="bounce" />
+         <p:messages
+            id="messages"
+            showDetail="true"
+            autoUpdate="true"
+            closable="true"
+            showIcon="false"
+            showSummary="true"
+            styleClass="sorteio" />
+         <p:panelGrid
+            id="sorteio"
+            columns="2"
+            styleClass="sorteio">
+            <p:outputLabel
+               value="Instância:"
+               for="instancia" />
+            <p:selectOneMenu
+               id="instancia"
+               value="#{sorteio.instancia}"
+               styleClass="campo-selecao-grande">
+               <f:selectItem
+                  itemValue="#{null}"
+                  itemLabel="Em que instância se dará o sorteio?"
+                  noSelectionOption="false"
+                  itemDisabled="false" />
+               <f:selectItems
+                  value="#{sorteio.instancias}"
+                  var="instancia"
+                  itemLabel="#{instancia.label}"
+                  itemValue="#{instancia}" />
+               <p:ajax
+                  event="change"
+                  process="@this"
+                  update=":fo-ns:relatores, :fo-ns:processos"
+                  listener="#{sorteio.selecionarInstancia}" />
+            </p:selectOneMenu>
+            <p:outputLabel
+               value="Participantes:"
+               for="relatores" />
+            <p:pickList
+               id="relatores"
+               value="#{sorteio.listaSelecaoRelatores}"
+               var="relator"
+               itemLabel="#{relator.nome}"
+               itemValue="#{relator.id}"
+               converter="relatorConverter"
+               showSourceFilter="true"
+               showTargetFilter="true"
+               filterMatchMode="contains"
+               showCheckbox="true"
+               addLabel="Adicionar"
+               addAllLabel="Adicionar todos"
+               removeLabel="Remover"
+               removeAllLabel="Remover todos"
+               orientation="horizontal"
+               responsive="false">
+               <f:facet name="sourceCaption">
+                  <h:outputText
+                     id="totalRelatoresDisponiveis"
+                     value="#{sorteio.totalRelatoresDisponiveis} DISPONÍVEIS" />
+               </f:facet>
+               <f:facet name="targetCaption">
+                  <h:outputText value="#{sorteio.totalRelatoresEscolhidos} ESCOLHIDOS" />
+               </f:facet>
+               <p:column>
+                  <h:outputText
+                     value="#{relator.nome}"
+                     title="E-mail: #{relator.email}" />
+               </p:column>
+               <p:ajax
+                  event="transfer"
+                  listener="#{sorteio.transferirRelator}"
+                  update="@this" />
+            </p:pickList>
+            <p:outputLabel
+               value="Processos:"
+               for="processos" />
+            <p:pickList
+               id="processos"
+               value="#{sorteio.listaSelecaoProcessos}"
+               var="processo"
+               itemLabel="#{processo.numero}"
+               itemValue="#{processo.id}"
+               converter="processoConverter"
+               showSourceFilter="true"
+               showTargetFilter="true"
+               filterMatchMode="contains"
+               showCheckbox="true"
+               addLabel="Adicionar"
+               addAllLabel="Adicionar todos"
+               removeLabel="Remover"
+               removeAllLabel="Remover todos"
+               responsive="false"
+               orientation="horizontal">
+               <f:facet name="sourceCaption">
+                  <h:outputText value="#{sorteio.totalProcessosDisponiveis} DISPONÍVEIS" />
+               </f:facet>
+               <f:facet name="targetCaption">
+                  <h:outputText value="#{sorteio.totalProcessosEscolhidos} ESCOLHIDOS" />
+               </f:facet>
+               <p:column>
+                  <h:outputText
+                     value="#{processo.numero}"
+                     title="Interessado: #{processo.interessado}" />
+               </p:column>
+               <p:ajax
+                  event="transfer"
+                  listener="#{sorteio.transferirProcesso}"
+                  update="@this" />
+            </p:pickList>
+            <p:outputLabel value="" />
+            <shiro:hasAnyRoles name="GERENCIA_SECRETARIA_GERAL,COORDENACAO_INFORMATICA">
+               <p:commandButton
+                  value="SORTEAR PROCESSOS"
+                  icon="fa fa-fw fa-cube"
+                  actionListener="#{sorteio.sortear}"
+                  process="@this"
+                  update="@form, :fo-ns:messages"
+                  oncomplete="fecharMensagem('fo-ns')"
+                  styleClass="bt-sortear" />
+            </shiro:hasAnyRoles>
+         </p:panelGrid>
+         <p:tooltip />
+      </h:form>
+   </ui:define>
+</ui:composition>

@@ -1,0 +1,3 @@
+USE mysql;
+
+DROP DATABASE IF EXISTS sep;

@@ -1,0 +1,114 @@
+apply plugin: 'eclipse-wtp'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+archivesBaseName = 'sep'
+group = 'br.gov.go.agr.secretariageral.sep'
+version = 'v1.0.0'
+
+eclipse {
+   wtp {
+      facet {
+         facet name: 'java', version: '1.8'
+         facet name: 'jst.web', version: '3.0'
+      }
+   }
+}
+
+repositories {
+   
+   mavenLocal()
+   mavenCentral()
+   
+   maven { url 'http://repository.primefaces.org' }
+   maven { url "http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/" }
+   maven { url 'http://dl.bintray.com/deluan/maven' }
+   maven { url 'https://jitpack.io' }
+   
+}
+
+dependencies {
+   
+   compile 'org.slf4j:slf4j-simple:1.6.1'
+   compile 'log4j:log4j:1.2.17'
+   compile 'org.slf4j:slf4j-log4j12:1.7.10'
+   compile 'com.jcabi:jcabi-log:0.17.1'
+   compile 'mysql:mysql-connector-java:5.1.25'
+   compile 'org.projectlombok:lombok:1.16.16'
+   compile 'javax.servlet:javax.servlet-api:3.1.0'
+   compile 'jstl:jstl:1.2'
+   compile 'com.sun.faces:jsf-api:2.2.14'
+   compile 'com.sun.faces:jsf-impl:2.2.14'
+   compile 'org.primefaces:primefaces:6.1'
+   compile 'org.primefaces.themes:bootstrap:1.0.10'
+   compile 'com.github.adminfaces:admin-theme:1.0.0-RC11'
+   compile 'org.ocpsoft.rewrite:rewrite-servlet:3.4.1.Final'
+   compile 'org.ocpsoft.rewrite:rewrite-config-prettyfaces:3.4.1.Final'
+   compile 'org.apache.poi:poi:3.15'
+   compile 'org.apache.poi:poi-ooxml:3.13'
+   compile 'com.lowagie:itext:2.1.7'
+   compile 'net.sf.jasperreports:jasperreports:6.1.1'
+   compile 'net.bootsfaces:bootsfaces:1.0.2'
+//   compile 'org.apache.shiro:shiro-core:1.3.2'
+//   compile 'org.apache.shiro:shiro-web:1.3.2'
+   compile 'org.apache.shiro:shiro-core:1.4.0'
+   compile 'org.apache.shiro:shiro-web:1.4.0'
+   compile 'org.ops4j.pax.shiro:pax-shiro-faces:0.1.0'
+   compile 'org.apache.directory.api:api-all:1.0.0-RC2'
+   compile 'com.mitchellbosecke:pebble:2.3.0'
+   compile 'org.fusesource.jansi:jansi:1.14'
+   compile 'org.animatejsf:animatejsf:1.1'
+   compile 'org.chartistjsf:ChartistJSF:2.1'
+   compile 'io.javaslang:javaslang:2.0.6'
+   compile 'org.springframework:spring-webmvc:4.3.5.RELEASE'
+   compile 'com.fasterxml.jackson.core:jackson-core:2.8.7'
+   compile 'com.fasterxml.jackson.core:jackson-databind:2.8.7'
+   compile 'com.thedeanda:lorem:2.1'
+   compile 'com.github.kenglxn.QRGen:javase:2.2.0'
+   compile 'com.github.alexvictoor:netty-livereload:0.1'
+   compile 'com.github.ben-manes.caffeine:caffeine:2.4.0'
+   compile 'org.jsoup:jsoup:1.10.2'
+   compile 'org.apache.pdfbox:pdfbox:2.0.5'
+   compile 'com.squareup:pollexor:2.0.4'
+   compile 'joda-time:joda-time:2.9.9'
+   compile 'org.quartz-scheduler:quartz:2.2.3'
+   compile 'org.quartz-scheduler:quartz-jobs:2.2.3'
+   compile 'com.opencsv:opencsv:3.9'
+   compile 'com.esotericsoftware.yamlbeans:yamlbeans:1.11'
+   compile 'org.jyaml:jyaml:1.3'
+   compile 'org.apache.commons:commons-email:1.3.3'
+   compile 'org.hibernate:hibernate-validator:5.1.1.Final'
+   compile 'org.hibernate:hibernate-validator-cdi:5.1.1.Final'
+   compile 'org.hibernate:hibernate-validator-annotation-processor:5.1.1.Final'
+   
+   compile files('./src/main/webapp/WEB-INF/lib/config-parser-v1.0.0.jar')
+   compile files('./src/main/webapp/WEB-INF/lib/verify-v1.0.0.jar')
+   compile files('./src/main/webapp/WEB-INF/lib/jext-v1.0.0.jar')
+   compile files('./src/main/webapp/WEB-INF/lib/jedi-app-v1.0.0.jar')
+   compile files('./src/main/webapp/WEB-INF/lib/jedi-auditoria-app-v1.0.0.jar')
+   compile files('./src/main/webapp/WEB-INF/lib/jedi-orm-v1.0.0.jar')
+   compile files('./src/main/webapp/WEB-INF/lib/pickle-v1.0.0.jar')
+   compile files('./src/main/webapp/WEB-INF/lib/arial.jar')
+   compile files('./src/main/webapp/WEB-INF/lib/times.jar')
+   
+   testCompile 'junit:junit:4.12'
+   testCompile 'br.com.six2six:fixture-factory:3.1.0'
+   testCompile 'org.assertj:assertj-core:3.6.2'
+   testCompile 'org.assertj:assertj-db:1.1.1'
+   testCompile 'org.hamcrest:java-hamcrest:2.0.0.0'
+   testCompile 'com.github.javafaker:javafaker:0.12'
+   testCompile 'io.codearte.jfairy:jfairy:0.5.3'
+   testCompile 'org.fluttercode.datafactory:datafactory:0.8'
+   testCompile 'com.github.mirreck:java-fake-factory:1.0.2'
+   testCompile 'com.insightfullogic:lambda-behave:0.4'
+   testCompile 'org.seleniumhq.selenium:selenium-java:3.3.1'
+   testCompile 'com.codeborne:selenide:4.4.2'
+   
+}
+
+configurations.all {
+   exclude module: 'slf4j-log4j12'
+   exclude module: 'slf4j-simple'
+}

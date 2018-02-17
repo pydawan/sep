@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html
+   xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:p="http://primefaces.org/ui">
+<h:head>
+   <meta charset="UTF-8" />
+   <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+   <meta
+      name="apple-mobile-web-app-capable"
+      content="yes" />
+   <h:outputStylesheet
+      library="css"
+      name="sep.css" />
+   <title>SEP - SORTEIO ELETRÔNICO DE PROCESSOS</title>
+</h:head>
+<h:body>
+   <p:panel
+      styleClass="login"
+      header="Sorteio Eletrônico de Processos">
+      <h:form
+         id="form-login"
+         prependId="false">
+         <p:growl
+            id="growl"
+            showDetail="false"
+            sticky="false" />
+         <p:graphicImage
+            library="imagens"
+            name="vigia-icone.png"
+            style="position: relative; left: 45.5%;" />
+         <p:panelGrid
+            id="grid"
+            columns="2"
+            styleClass="login no-border box-center">
+            <p:outputLabel
+               value="Usuário:"
+               for="username"
+               style="font-weight: bold;" />
+            <p:inputText
+               id="username"
+               name="username"
+               styleClass="login"
+               maxlength="50"
+               size="20"
+               value="#{autenticacao.username}"
+               required="true"
+               requiredMessage="O usuário é um campo de preenchimento obrigatório!" />
+            <p:outputLabel
+               value="Senha:"
+               for="password"
+               style="font-weight: bold;" />
+            <p:password
+               id="password"
+               name="password"
+               styleClass="login"
+               maxLength="50"
+               size="20"
+               value="#{autenticacao.password}"
+               required="true"
+               requiredMessage="A senha é um campo de preenchimento obrigatório!" />
+            <p:outputLabel value="" />
+            <p:row>
+               <p:column>
+                  <p:commandButton
+                     value="Entrar"
+                     styleClass="login ui-priority-primary"
+                     actionListener="#{autenticacao.login}"
+                     update="grid growl" />
+                  <p:spacer width="5" />
+                  <p:commandButton
+                     value="Cancelar"
+                     styleClass="login"
+                     actionListener="#{autenticacao.cancelar}"
+                     resetValues="true"
+                     update="@form"
+                     immediate="true" />
+               </p:column>
+            </p:row>
+         </p:panelGrid>
+      </h:form>
+   </p:panel>
+</h:body>
+</html>

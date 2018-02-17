@@ -1,0 +1,371 @@
+<ui:composition
+   template="/WEB-INF/templates/layout.xhtml"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:p="http://primefaces.org/ui"
+   xmlns:b="http://bootsfaces.net/ui"
+   xmlns:o="http://omnifaces.org/ui"
+   xmlns:of="http://omnifaces.org/functions"
+   xmlns:aj="http://www.animatejsf.org/animate"
+   xmlns:ct="http://www.chartistjsf.org/charts"
+   xmlns:shiro="http://shiro.ops4j.org/tags">
+   <ui:define name="head.js">
+      <h:outputScript
+         library="js"
+         name="cadastro-relatores.js" />
+   </ui:define>
+   <ui:define name="area">
+      <h:outputText value="#{relator.titulo}" />
+   </ui:define>
+   <ui:define name="content">
+      <h:form
+         id="fo-cr"
+         prependId="true"
+         styleClass="fo-registros">
+         <aj:animate
+            target="fo-cr"
+            type="bounce" />
+         <p:messages
+            id="messages"
+            showDetail="true"
+            autoUpdate="true"
+            closable="true"
+            showIcon="false"
+            showSummary="true"
+            escape="false" />
+         <p:panelGrid
+            id="pn-registros"
+            columns="1"
+            styleClass="pn-registros">
+            <p:column>
+               <p:dataTable
+                  id="registros"
+                  widgetVar="registros"
+                  value="#{relator.registros}"
+                  var="registro"
+                  rows="5"
+                  styleClass="dt-registros"
+                  lazy="true"
+                  paginator="true"
+                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
+                        {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                  currentPageReportTemplate="Página {currentPage} de {totalPages}"
+                  rowsPerPageTemplate="5,10,15"
+                  resizableColumns="true"
+                  emptyMessage="Nenhum membro cadastrado."
+                  reflow="true">
+                  <f:facet name="header">
+                     <h:inputHidden id="globalFilter" />
+                     <p:column>
+                        <p:panelGrid
+                           id="pn-pesquisa"
+                           columns="1"
+                           styleClass="pn-pesquisa">
+                           <shiro:hasAnyRoles name="GERENCIA_SECRETARIA_GERAL,COORDENACAO_INFORMATICA">
+                              <p:commandButton
+                                 value="Adicionar Relator"
+                                 icon="fa fa-fw fa-user-plus"
+                                 actionListener="#{relator.adicionar}"
+                                 rendered="#{usuarioMB.usuario.admin}"
+                                 process="@this"
+                                 oncomplete="carregarFormulario()"
+                                 update=":di-registro-titulo, :fo-registro"
+                                 styleClass="adicionar btn-default" />
+                           </shiro:hasAnyRoles>
+                        </p:panelGrid>
+                     </p:column>
+                  </f:facet>
+                  <p:column
+                     id="col-id"
+                     headerText="Id"
+                     width="3%"
+                     filterBy="#{registro.id}"
+                     filterMaxLength="7"
+                     sortBy="#{registro.id}">
+                     <h:outputText value="#{registro.id}" />
+                  </p:column>
+                  <p:column
+                     id="col-nome"
+                     width="25%"
+                     headerText="Nome"
+                     filterBy="#{registro.nome}"
+                     filterMaxLength="50">
+                     <h:outputText value="#{registro.nome}" />
+                  </p:column>
+                  <p:column
+                     headerText="Instância"
+                     width="10%"
+                     filterBy="#{registro.instancia}"
+                     filterMaxLength="20">
+                     <f:facet name="filter">
+                        <p:selectOneMenu id="col-instancia">
+                           <f:selectItem
+                              itemLabel="Selecione"
+                              itemValue="#{null}"
+                              noSelectionOption="true" />
+                           <f:selectItems
+                              value="#{relator.instancias}"
+                              var="instancia"
+                              itemLabel="#{instancia.nome}"
+                              itemValue="#{instancia.valor}" />
+                        </p:selectOneMenu>
+                     </f:facet>
+                     <h:outputText
+                        value="#{registro.instancia}"
+                        converter="instanciaConverter" />
+                  </p:column>
+                  <p:column
+                     id="col-email"
+                     headerText="E-mail"
+                     width="20%"
+                     filterBy="#{registro.email}"
+                     filterMaxLength="50">
+                     <h:outputText value="#{registro.email}" />
+                  </p:column>
+                  <p:column
+                     headerText="Situação"
+                     width="10%"
+                     filterBy="#{registro.situacao}"
+                     filterMaxLength="7">
+                     <f:facet name="filter">
+                        <p:selectOneMenu id="col-situacao">
+                           <f:selectItem
+                              itemLabel="Selecione"
+                              itemValue="#{null}" />
+                           <f:selectItems
+                              value="#{relator.situacoesCadastro}"
+                              var="situacao"
+                              itemLabel="#{situacao.nome}"
+                              itemValue="#{situacao.valor}" />
+                        </p:selectOneMenu>
+                     </f:facet>
+                     <h:outputText
+                        value="#{registro.situacao}"
+                        converter="situacaoCadastroConverter" />
+                  </p:column>
+                  <p:column
+                     headerText="Ações"
+                     width="15%">
+                     <shiro:hasAnyRoles name="GERENCIA_SECRETARIA_GERAL,COORDENACAO_INFORMATICA">
+                        <p:commandButton
+                           value="Editar"
+                           icon="fa fa-fw fa-edit"
+                           styleClass="bt-editar btn-warning"
+                           actionListener="#{relator.editar(registro)}"
+                           rendered="#{usuarioMB.usuario.admin}"
+                           oncomplete="PF('di-registro').show()"
+                           process="@this"
+                           update=":di-registro-titulo, :fo-registro" />
+                        <p:spacer width="5px" />
+                     </shiro:hasAnyRoles>
+                     <shiro:hasRole name="COORDENACAO_INFORMATICA">
+                        <p:commandButton
+                           value="Remover"
+                           icon="fa fa-fw fa-trash-o"
+                           styleClass="bt-remover btn-danger"
+                           actionListener="#{relator.confirmarRemocao(registro)}"
+                           rendered="#{usuarioMB.usuario.admin}"
+                           oncomplete="PF('cd-registro').show()"
+                           update=":cd-registro-titulo" />
+                     </shiro:hasRole>
+                  </p:column>
+                  <f:facet name="footer">
+                     <h:outputText
+                        value="REGISTROS CADASTRADOS: #{relator.registros.rowCount}"
+                        styleClass="texto-negrito" />
+                  </f:facet>
+               </p:dataTable>
+            </p:column>
+         </p:panelGrid>
+      </h:form>
+      <p:dialog
+         id="di-registro"
+         widgetVar="di-registro"
+         resizable="false"
+         draggable="false"
+         modal="true"
+         showEffect="slide"
+         appendToBody="false">
+         <f:facet name="header">
+            <p>
+               <p:graphicImage
+                  library="imagens"
+                  name="camara-julgamento-icone.png"
+                  styleClass="icone-registro" />
+               <h:outputText
+                  id="di-registro-titulo"
+                  value="#{relator.tituloDialog}" />
+            </p>
+         </f:facet>
+         <h:form
+            id="fo-registro"
+            prependId="true">
+            <p:focus context="fo-registro" />
+            <p:panelGrid
+               columns="2"
+               styleClass="no-border">
+               <p:outputLabel
+                  value="Nome:"
+                  for="nome" />
+               <p:column>
+                  <p:inputText
+                     id="nome"
+                     value="#{relator.registro.nome}"
+                     styleClass="campo-texto"
+                     maxlength="50"
+                     size="51"
+                     required="true"
+                     requiredMessage="Nome é um campo de preenchimento obrigatório!">
+                     <p:clientValidator event="blur" />
+                  </p:inputText>
+                  <p:message
+                     for="nome"
+                     display="both" />
+               </p:column>
+               <p:outputLabel
+                  value="E-mail:"
+                  for="email" />
+               <p:column>
+                  <p:inputText
+                     id="email"
+                     value="#{relator.registro.email}"
+                     styleClass="campo-texto"
+                     required="false"
+                     validatorMessage="E-mail inválido!">
+                     <f:validateRegex pattern="(^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$)|^$" />
+                     <p:clientValidator event="blur" />
+                  </p:inputText>
+                  <p:message
+                     for="email"
+                     display="both" />
+               </p:column>
+               <p:outputLabel
+                  value="Instância:"
+                  for="instancia" />
+               <p:column>
+                  <p:selectOneMenu
+                     id="instancia"
+                     value="#{relator.registro.instancia}"
+                     styleClass="campo-selecao"
+                     widgetVar="instancias"
+                     converter="#{instanciaConverter}">
+                     <p:ajax listener="#{relator.selecionarInstancia}" />
+                     <f:selectItems
+                        value="#{relator.instancias}"
+                        var="instancia"
+                        itemLabel="#{instancia.nome}"
+                        itemValue="#{instancia.valor}" />
+                  </p:selectOneMenu>
+               </p:column>
+               <p:outputLabel
+                  value="Situação:"
+                  for="situacaoCadastro" />
+               <p:selectOneMenu
+                  id="situacaoCadastro"
+                  value="#{relator.registro.situacao}"
+                  styleClass="campo-selecao"
+                  widgetVar="situacoes">
+                  <f:selectItems
+                     value="#{relator.situacoesCadastro}"
+                     var="situacao"
+                     itemLabel="#{situacao.nome}"
+                     itemValue="#{situacao.valor}" />
+                  <p:ajax
+                     event="change"
+                     listener="#{relator.selecionarSituacaoCadastro}" />
+               </p:selectOneMenu>
+               <p:outputLabel
+                  value="Observações:"
+                  for="observacoes" />
+               <p:inputTextarea
+                  id="observacoes"
+                  value="#{relator.registro.observacoes}"
+                  styleClass="campo-areatexto"
+                  maxlength="400"
+                  rols="5"
+                  cols="50"
+                  autoResize="false"
+                  counter="contador"
+                  counterTemplate="Restam {0} caracteres." />
+               <p:outputLabel
+                  value=""
+                  for="contador" />
+               <h:outputText id="contador" />
+               <p:outputLabel value="" />
+               <p:row>
+                  <p:column colspan="2">
+                     <p:panel styleClass="di-registro-acoes">
+                        <shiro:hasAnyRoles name="GERENCIA_SECRETARIA_GERAL,COORDENACAO_INFORMATICA">
+                           <p:commandButton
+                              id="salvar"
+                              value="Salvar"
+                              icon="fa fa-fw fa-save"
+                              actionListener="#{relator.salvar}"
+                              update=":fo-cr:registros, :fo-cr:messages, :fo-registro"
+                              oncomplete="PF('di-registro').hide(); fecharMensagem('fo-cr');"
+                              validateClient="true"
+                              styleClass="btn-primary" />
+                           <p:spacer width="5" />
+                        </shiro:hasAnyRoles>
+                        <p:commandButton
+                           id="limpar"
+                           value="Limpar"
+                           icon="fa fa-fw fa-eraser"
+                           actionListener="#{relator.limpar}"
+                           resetValues="true"
+                           process="@this"
+                           update="@form"
+                           immediate="true"
+                           validateClient="true"
+                           oncomplete="limpar()" />
+                     </p:panel>
+                  </p:column>
+               </p:row>
+            </p:panelGrid>
+         </h:form>
+      </p:dialog>
+      <p:confirmDialog
+         id="cd-registro"
+         showEffect="bounce"
+         hideEffect="fade"
+         severity="alert"
+         widgetVar="cd-registro"
+         width="300px">
+         <f:facet name="header">
+            <h:outputText
+               id="cd-registro-titulo"
+               value="#{relator.tituloDialog}" />
+         </f:facet>
+         <f:facet name="message">
+            <h:outputText
+               value="#{relator.mensagemConfirmacaoRemocaoRegistro}"
+               style="font-size: 11.5pt" />
+         </f:facet>
+         <p:panel styleClass="pn-cd-registro">
+            <h:form
+               id="fo-cd-registro"
+               prependId="false">
+               <shiro:hasRole name="COORDENACAO_INFORMATICA">
+                  <p:commandButton
+                     id="sim"
+                     value="Sim"
+                     actionListener="#{relator.remover}"
+                     update=":fo-cr:registros"
+                     oncomplete="PF('cd-registro').hide(); fecharMensagem('fo-cr')"
+                     icon="fa fa-fw fa-thumbs-o-up"
+                     styleClass="btn-danger" />
+                  <p:spacer width="2px" />
+                  <p:commandButton
+                     id="nao"
+                     type="button"
+                     value="Não"
+                     onclick="PF('cd-registro').hide()"
+                     icon="fa fa-fw fa-thumbs-o-down"
+                     styleClass="btn-default" />
+               </shiro:hasRole>
+            </h:form>
+         </p:panel>
+      </p:confirmDialog>
+   </ui:define>
+</ui:composition>
